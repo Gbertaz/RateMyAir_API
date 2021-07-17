@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="1.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RateMyAir.Entities\RateMyAir.Entities.csproj" />
+    <ProjectReference Include="..\RateMyAir.Interfaces\RateMyAir.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
