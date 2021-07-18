@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RateMyAir.Entities.DTO;
+using RateMyAir.Entities.Exceptions;
 using RateMyAir.Entities.Models;
 using RateMyAir.Interfaces;
 using System;
@@ -39,7 +40,7 @@ namespace RateMyAir.API.Controllers
             if (data == null)
             {
                 _logger.LogInfo($"AirData with id: {id} doesn't exist.");
-                return NotFound();
+                throw new NotFoundException();
             }
 
             var result = _mapper.Map<AirDataDtoOut>(data);
@@ -60,7 +61,7 @@ namespace RateMyAir.API.Controllers
             if (lastData == null)
             {
                 _logger.LogInfo($"Last AirData doesn't exist in the database.");
-                return NotFound();
+                throw new NotFoundException();
             }
 
             var result = _mapper.Map<AirDataDtoOut>(lastData);
@@ -94,7 +95,7 @@ namespace RateMyAir.API.Controllers
             if (model == null)
             {
                 _logger.LogError("AirDataDTOIn object sent from client is null.");
-                return BadRequest("AirDataDTOIn object is null");
+                throw new BadRequestException("AirDataDTOIn object is null");
             }
 
             var entity = _mapper.Map<AirData>(model);
