@@ -46,6 +46,14 @@ namespace RateMyAir.API.Middlewares
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         responseModel.Success = false;
                         break;
+                    case NotFoundException e:
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        responseModel.Success = true;
+                        break;
+                    case BadRequestException e:
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        responseModel.Success = true;
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         responseModel.Success = false;
