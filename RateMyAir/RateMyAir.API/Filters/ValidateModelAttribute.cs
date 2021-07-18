@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace RateMyAir.API.Filters
@@ -15,15 +16,16 @@ namespace RateMyAir.API.Filters
         {
             if (context.ModelState.ErrorCount > 0)
             {
-
                 List<Object> list = new List<Object>();
 
                 var modelType = context.ActionDescriptor.Parameters
-                    .FirstOrDefault(p => p.BindingInfo.BindingSource.Id.Equals("Body", StringComparison.InvariantCultureIgnoreCase))?.ParameterType; //Get model type  
+                    .FirstOrDefault(p => p.BindingInfo.BindingSource.Id.Equals("Body", StringComparison.InvariantCultureIgnoreCase))?.ParameterType; //Get model type
 
                 foreach (var e in context.ModelState)
                 {
-                    var property = modelType.GetProperties().FirstOrDefault(p => p.Name.Equals(e.Key, StringComparison.InvariantCultureIgnoreCase));
+                    PropertyInfo property = null;
+                    if(modelType != null) property = modelType.GetProperties().FirstOrDefault(p => p.Name.Equals(e.Key, StringComparison.InvariantCultureIgnoreCase));
+
                     String propertyName = property != null ? property.Name : e.Key;
                     String displayName = propertyName;
                     if (property != null)
