@@ -10,7 +10,7 @@ namespace RateMyAir.Repository
 {
     public class DatabaseContext : DbContext
     {
-        public DbSet<AirData> AirData { get; set; }
+        public DbSet<AirQuality> AirData { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {

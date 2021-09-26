@@ -1,6 +1,7 @@
 ﻿using LoggerService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -88,7 +89,7 @@ namespace RateMyAir.API.Extensions
                     Version = "v1",
                     Description = "",
                     TermsOfService = new Uri("https://github.com/Gbertaz"),
-                    Contact = new OpenApiContact { Name = "iDigital3", Email = "nottheworstdev@gmail.com", Url = new Uri("https://github.com/Gbertaz") },
+                    Contact = new OpenApiContact { Name = "RateMyAir", Email = "nottheworstdev@gmail.com", Url = new Uri("https://github.com/Gbertaz") },
                     License = new OpenApiLicense { Name = "Use under LICX", Url = new Uri("https://github.com/Gbertaz") }
                 });
                 c.CustomSchemaIds(i => i.FullName);
@@ -165,6 +166,43 @@ namespace RateMyAir.API.Extensions
         public static void ConfigureRepositoryManager(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryManager, RepositoryManager>();
+        }
+
+        public static void AddApiVersioningExtension(this IServiceCollection services)
+        {
+            //services.AddVersionedApiExplorer(config =>
+            //{
+            //    //The format of the version added to the route URL
+            //    config.GroupNameFormat = "'v'VVV";
+
+            //    config.AddApiVersionParametersWhenVersionNeutral = true;
+
+            //    config.AssumeDefaultVersionWhenUnspecified = true;
+            //    config.DefaultApiVersion = new ApiVersion(1, 0);
+
+            //    //Tells swagger to replace the version in the controller route
+            //    config.SubstituteApiVersionInUrl = true;
+            //});
+
+            services.AddApiVersioning(config =>
+            {
+                // Advertise the API versions supported for the particular endpoint adding the headers in the API response
+                config.ReportApiVersions = true;
+
+                // If the client hasn't specified the API version in the request, use the default API version number
+                config.AssumeDefaultVersionWhenUnspecified = true;
+
+                // Specify the default API Version
+                config.DefaultApiVersion = new ApiVersion(1, 0);
+
+                // Header versioning
+                config.ApiVersionReader = new HeaderApiVersionReader("api-version");
+
+                // Supporting multiple versioning scheme
+                //config.ApiVersionReader = ApiVersionReader.Combine(
+                //    new QueryStringApiVersionReader("v"),
+                //    new HeaderApiVersionReader("api-version"));
+            });
         }
 
     }

@@ -8,8 +8,8 @@ namespace RateMyAir.API.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<AirDataDtoIn, AirData>();
-            CreateMap<AirData, AirDataDtoOut>()
+            CreateMap<AirQualityDtoIn, AirQuality>();
+            CreateMap<AirQuality, AirQualityDtoOut>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AirDataID))
                 .ForMember(dest => dest.OutdoorTemp, opt => opt.MapFrom(src => src.Temperature1))
                 .ForMember(dest => dest.IndoorTemp, opt => opt.MapFrom(src => src.Temperature0))

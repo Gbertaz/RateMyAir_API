@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RateMyAir.Entities.Models
 {
-    public class AirData
+    public class AirQuality
     {
         [Key]
         public int AirDataID { get; set; }

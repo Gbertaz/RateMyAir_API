@@ -47,7 +47,7 @@ namespace RateMyAir.API
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
             }).AddXmlDataContractSerializerFormatters();
-            //services.AddApiVersioningExtension();
+            services.AddApiVersioningExtension();
         }
 
 

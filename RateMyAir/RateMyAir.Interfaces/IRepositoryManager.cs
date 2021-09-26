@@ -8,7 +8,7 @@ namespace RateMyAir.Interfaces
 {
     public interface IRepositoryManager : IDisposable
     {
-        IAirDataRepository AirData { get; }
+        IAirQualityRepository AirQuality { get; }
         Task<int> SaveAsync();
     }
 }

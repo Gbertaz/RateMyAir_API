@@ -12,23 +12,23 @@ namespace RateMyAir.Repository
         private DatabaseContext _context;
         private bool _disposed = false;
 
-        public IAirDataRepository _airDataRepo;
+        public IAirQualityRepository _airQualityRepository;
 
         public RepositoryManager(DatabaseContext repositoryContext)
         {
             _context = repositoryContext;
         }
 
-        public IAirDataRepository AirData
+        public IAirQualityRepository AirQuality
         {
             get
             {
-                if (_airDataRepo == null)
+                if (_airQualityRepository == null)
                 {
-                    _airDataRepo = new AirDataRepository(_context);
+                    _airQualityRepository = new AirQualityRepository(_context);
                 }
 
-                return _airDataRepo;
+                return _airQualityRepository;
             }
         }
 

@@ -7,14 +7,17 @@ namespace RateMyAir.Entities.DTO
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
+        public int RecordsTotal { get; set; }
 
-        public PagedResponse(T data, int pageNumber, int pageSize, string message = null) : base(message)
+        public PagedResponse(T data, int pageNumber, int pageSize, int recordsTotal, string message = null) : base(message)
         {
             this.PageNumber = pageNumber;
             this.PageSize = pageSize;
+            this.RecordsTotal = recordsTotal;
             this.Data = data;
             this.Success = true;
             Errors = new List<object>();
         }
     }
+
 }

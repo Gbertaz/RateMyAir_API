@@ -2,7 +2,7 @@
 
 namespace RateMyAir.Entities.DTO
 {
-    public class AirDataDtoOut
+    public class AirQualityDtoOut
     {
         public int Id { get; set; }
         public float OutdoorTemp { get; set; }
