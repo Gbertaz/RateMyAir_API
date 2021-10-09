@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateMyAir.Repository", "Rat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateMyAir.Entities", "RateMyAir.Entities\RateMyAir.Entities.csproj", "{6FE2CFAD-72C3-4DB1-A90A-917747D33EB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "LoggerService\LoggerService.csproj", "{0F1FD34C-64F6-4293-87A5-E174A3F06D16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "LoggerService\LoggerService.csproj", "{0F1FD34C-64F6-4293-87A5-E174A3F06D16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

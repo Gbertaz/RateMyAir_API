@@ -14,22 +14,22 @@ namespace RateMyAir.Repository
 
         public async Task<AirQuality> GetAirQualityByIdAsync(int airQualityId, bool trackChanges)
         {
-            return await FindByCondition(x => x.AirDataID == airQualityId, trackChanges).FirstOrDefaultAsync();
+            return await FindByCondition(x => x.AirQualityId == airQualityId, trackChanges).FirstOrDefaultAsync();
         }
 
         public Task<AirQuality> GetLastAsync(bool trackChanges)
         {
-            return FindByCondition(x => x.AirDataID > 0, trackChanges).OrderByDescending(x => x.CreatedDate).FirstOrDefaultAsync();
+            return FindByCondition(x => x.AirQualityId > 0, trackChanges).OrderByDescending(x => x.CreatedAt).FirstOrDefaultAsync();
         }
 
         public IQueryable<AirQuality> GetAirQuality(GetAirQualityParameters filter, bool trackChanges)
         {
-            return FindByCondition(x => x.CreatedDate >= filter.FromDate && x.CreatedDate <= filter.ToDate, trackChanges);
+            return FindByCondition(x => x.CreatedAt >= filter.FromDate && x.CreatedAt <= filter.ToDate, trackChanges);
         }
 
-        public void CreateAirData(AirQuality model)
+        public void CreateAirQuality(AirQuality entity)
         {
-            Create(model);
+            Create(entity);
         }
 
     }

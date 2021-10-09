@@ -6,14 +6,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using RateMyAir.Entities.Models;
 using RateMyAir.Interfaces;
 using RateMyAir.Repository;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace RateMyAir.API.Extensions
 {

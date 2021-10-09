@@ -1,23 +1,18 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+
+#nullable disable
 
 namespace RateMyAir.Entities.Models
 {
-    public class AirQuality
+    public partial class AirQuality
     {
-        [Key]
-        public int AirDataID { get; set; }
-        public float Temperature { get; set; }
-        public float Temperature0 { get; set; }
-        public float Temperature1 { get; set; }
-        public float Humidity { get; set; }
-        public float Pressure { get; set; }
-        public float Altitude { get; set; }
-        public float DewPoint { get; set; }
-        public float Pm25 { get; set; }
-        public float Pm10 { get; set; }
-        public float Pm25_norm { get; set; }
-        public float Pm10_norm { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public long AirQualityId { get; set; }
+        public double? TemperatureOutdoor { get; set; }
+        public double? TemperatureIndoor { get; set; }
+        public double? Humidity { get; set; }
+        public double? Pressure { get; set; }
+        public double? Pm25 { get; set; }
+        public double? Pm10 { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

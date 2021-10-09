@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace RateMyAir.API.Controllers.v1
 {
     [ApiVersion("1.0", Deprecated = false)]
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class AirQualityController : ControllerBase
     {
@@ -34,7 +34,7 @@ namespace RateMyAir.API.Controllers.v1
         /// <param name="id">Air Quality Id</param>
         /// <returns>Response of type AirQualityDtoOut</returns>
         [AllowAnonymous]
-        [HttpGet("{airQualityId}", Name = "GetAirQualityById")]
+        [HttpGet("airquality/{airQualityId}", Name = "GetAirQualityById")]
         [MapToApiVersion("1.0")]
         public async Task<IActionResult> GetAirQualityById(int airQualityId)
         {
@@ -42,7 +42,7 @@ namespace RateMyAir.API.Controllers.v1
 
             if (airQuality == null)
             {
-                _logger.LogInfo($"AirQUality with id: {airQualityId} doesn't exist.");
+                _logger.LogInfo($"AirQuality with id: {airQualityId} doesn't exist.");
                 throw new NotFoundException();
             }
 
@@ -51,17 +51,30 @@ namespace RateMyAir.API.Controllers.v1
         }
 
         /// <summary>
+        /// Get the most recent AirQuality
+        /// </summary>
+        /// <returns>Response of type AirQualityDtoOut</returns>
+        [AllowAnonymous]
+        [HttpGet("airquality/last", Name = "GetLastAirQuality")]
+        [MapToApiVersion("1.0")]
+        public async Task<IActionResult> GetLastAirQuality()
+        {
+            var last = await _repoManager.AirQuality.GetLastAsync(false);
+            return Ok(new Response<AirQualityDtoOut>(_mapper.Map<AirQualityDtoOut>(last)));
+        }
+
+        /// <summary>
         /// Get the paginated list of AirQuality
         /// </summary>
-        /// <param name="filter">GetAirQualityParameters filter parameters</param>
+        /// <param name="filter">GetAirQualityParameters filter</param>
         /// <returns>PagedResponse of type AirQualityDtoOut</returns>
         [AllowAnonymous]
-        [HttpGet(Name = "GetAirQuality")]
+        [HttpGet("airquality", Name = "GetAirQuality")]
         [MapToApiVersion("1.0")]
         public async Task<IActionResult> GetAirQuality([FromQuery] GetAirQualityParameters filter)
         {
             var airQuality = _repoManager.AirQuality.GetAirQuality(filter, false);
-            return Ok(await this.PaginateSourceData<AirQuality, AirQualityDtoOut, DateTime>(airQuality, filter.PageNumber, filter.PageSize, x => x.CreatedDate, _mapper.ConfigurationProvider));
+            return Ok(await this.PaginateSourceData<AirQuality, AirQualityDtoOut, DateTime>(airQuality, filter.PageNumber, filter.PageSize, x => x.CreatedAt, _mapper.ConfigurationProvider));
         }
 
         /// <summary>
@@ -70,9 +83,9 @@ namespace RateMyAir.API.Controllers.v1
         /// <param name="model">AirDataDtoIn</param>
         /// <returns>Response of type AirQualityDtoOut</returns>
         [AllowAnonymous]
-        [HttpPost(Name = "AddAirQuality")]
+        [HttpPost("airquality", Name = "AddAirQuality")]
         [MapToApiVersion("1.0")]
-        public async Task<IActionResult> AddAirQuality([FromBody] AirQualityDtoIn model)
+        public async Task<IActionResult> AddAirQuality([FromHeader] ClientCredentialsDtoIn credentials, [FromBody] AirQualityDtoIn model)
         {
             if (model == null)
             {
@@ -81,12 +94,12 @@ namespace RateMyAir.API.Controllers.v1
             }
 
             var entity = _mapper.Map<AirQuality>(model);
-
-            _repoManager.AirQuality.CreateAirData(entity);
+            entity.CreatedAt = DateTime.UtcNow;
+            _repoManager.AirQuality.CreateAirQuality(entity);
             await _repoManager.SaveAsync();
 
             var dtoOut = _mapper.Map<AirQualityDtoOut>(entity);
-            return CreatedAtRoute("GetAirQualityById", new { id = dtoOut.Id }, dtoOut);
+            return CreatedAtRoute("GetAirQualityById", new { airQualityId = dtoOut.Id }, dtoOut);
         }
 
     }
