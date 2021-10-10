@@ -80,18 +80,18 @@ I always try to use the best HTTP Status Code for every type of response. In thi
 
 ## Air Quality Index
 
-The Air Quality Index is based on concentration values of the following pollutants:
+The Air Quality Index level is based on concentration values of the following pollutants in µg/m3:
 
 * Particulate Matter: PM 10 micrograms per cubic meter
 * Fine Particulate Matter: PM 2.5 micrograms per cubic meter
 
-| Pollutant  | Index level based on pollutant concentrations in µg/m3 |
-| ------------- | ------------- |
+| Pollutant  | Index level |  |  |  |  |  |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 |        | Good  | Fair  | Moderate | Poor | Very poor | Extremely poor |
 | PM 2.5 | 0-10  | 10-20  | 20-25 | 25-50 | 50-75 | 75-800 |
 | PM 10  | 0-20 | 20-40 | 40-50 | 50-100 | 100-150 | 150-1200 |
 
-#### Details of the calculation algorithm
+### Details of the calculation algorithm
 
 The API *api/airquality/index* returns the Air Quality Index of each day between the *DateFrom* and *DateTo* parameters based on the average pollution of the 24 hours. If no dates are provided returns the last 24 hours Air Quality Index.  
 
