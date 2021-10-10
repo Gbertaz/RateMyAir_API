@@ -1,10 +1,12 @@
 # RateMyAir API
 
-This repository contains the implementation of the Rest APIs for the project RateMyAir.  
+This repository contains the implementation of the **Rest APIs** for the project **RateMyAir**.  
 
-Developed in .NET Core 5 using the Repository pattern, are designed to be lightweight and efficient paying special attention in complying with Microsoft standards, HTTP and also from a security point of view, in order to be robust, understandable and easily consumable by any client. The goal is to run them on a low-performing hardware such as the Raspberry Pi 4.
+It exposes the services to Insert to the database or provide to clients, the Air data collected by different sensors (more on that soon) to understand more about Air Quality where I live.  
 
-#### Some of the solutions adopted in this project might not be the best but it is also developed as a teaching project.
+Developed in **.NET Core 5** using the **Repository pattern**, are designed to be lightweight and efficient paying special attention in complying with Microsoft and HTTP standards. The security aspect is also important in order to be robust, understandable and easily consumable by any client. The goal is to run them on a low-performing hardware such as the Raspberry Pi 4.
+
+#### Some of the solutions implemented in this project might not be the best but it is also developed as a teaching project.
 
 ## Specifications
 
@@ -21,7 +23,7 @@ Developed in .NET Core 5 using the Repository pattern, are designed to be lightw
 
 ## Database Scaffolding
 
-The Database First Approach requires to create the tables in the database first, then creating the models in Visual Studio with the following procedure:
+The *Database First Approach* requires to create the tables in the database first, then creating the models in Visual Studio with the following procedure:
 
 * In Visual Studio open Package Manager Console (Tools => Nuget Package Manager => Package Manager Console)
 * In the "Default project" dropdown menu select "RateMyAir.Entities"
@@ -63,6 +65,37 @@ All the APIs use the following Json output structures depending on whether the r
     "data": []
 }
 ```
+
+#### HTTP Status Codes
+
+I always try to use the best HTTP Status Code for every type of response. In this particular project the following are the possible response code:
+
+* OK 200
+* Unauthorized 401
+* Forbidden 403
+* BadRequest 400
+* NotFound 404
+* InternalServerError 500
+
+
+## Air Quality Index
+
+The Air Quality Index is based on concentration values of the following pollutants:
+
+* Particulate Matter: PM 10 micrograms per cubic meter
+* Fine Particulate Matter: PM 2.5 micrograms per cubic meter
+
+| Pollutant  | Index level based on pollutant concentrations in µg/m3 |
+| ------------- | ------------- |
+|        | Good  | Fair  | Moderate | Poor | Very poor | Extremely poor |
+| PM 2.5 | 0-10  | 10-20  | 20-25 | 25-50 | 50-75 | 75-800 |
+| PM 10  | 0-20 | 20-40 | 40-50 | 50-100 | 100-150 | 150-1200 |
+
+#### Details of the calculation algorithm
+
+The API *api/airquality/index* returns the Air Quality Index of each day between the *DateFrom* and *DateTo* parameters based on the average pollution of the 24 hours. If no dates are provided returns the last 24 hours Air Quality Index.  
+
+Check out the O(n) Time and Space complexity implementation details in *RateMyAir.Services => PollutionService.cs* 
 
 
 ## Dependencies
