@@ -4,13 +4,13 @@ namespace RateMyAir.Entities.DTO
 {
     public class AirQualityDtoOut
     {
-        public int Id { get; set; }
-        public float TemperatureOutdoor { get; set; }
-        public float TemperatureIndoor { get; set; }
-        public float Humidity { get; set; }
-        public float Pressure { get; set; }
-        public float Pm25 { get; set; }
-        public float Pm10 { get; set; }
+        public long Id { get; set; }
+        public double TemperatureOutdoor { get; set; }
+        public double TemperatureIndoor { get; set; }
+        public double Humidity { get; set; }
+        public double Pressure { get; set; }
+        public double Pm25 { get; set; }
+        public double Pm10 { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }
