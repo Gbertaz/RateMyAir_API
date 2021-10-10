@@ -3,8 +3,6 @@ using Newtonsoft.Json;
 using RateMyAir.Entities.DTO;
 using RateMyAir.Entities.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 

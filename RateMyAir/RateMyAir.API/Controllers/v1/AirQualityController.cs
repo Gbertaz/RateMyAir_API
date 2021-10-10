@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RateMyAir.API.Attributes;
 using RateMyAir.API.Extensions;
 using RateMyAir.Entities.DTO;
 using RateMyAir.Entities.Exceptions;
@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace RateMyAir.API.Controllers.v1
 {
+    [ApiKey]
     [ApiVersion("1.0", Deprecated = false)]
     [Route("api")]
     [ApiController]
@@ -33,7 +34,6 @@ namespace RateMyAir.API.Controllers.v1
         /// </summary>
         /// <param name="id">Air Quality Id</param>
         /// <returns>Response of type AirQualityDtoOut</returns>
-        [AllowAnonymous]
         [HttpGet("airquality/{airQualityId}", Name = "GetAirQualityById")]
         [MapToApiVersion("1.0")]
         public async Task<IActionResult> GetAirQualityById(int airQualityId)
@@ -54,10 +54,18 @@ namespace RateMyAir.API.Controllers.v1
         /// Get the most recent AirQuality
         /// </summary>
         /// <returns>Response of type AirQualityDtoOut</returns>
-        [AllowAnonymous]
         [HttpGet("airquality/last", Name = "GetLastAirQuality")]
         [MapToApiVersion("1.0")]
         public async Task<IActionResult> GetLastAirQuality()
+        {
+            var last = await _repoManager.AirQuality.GetLastAsync(false);
+            return Ok(new Response<AirQualityDtoOut>(_mapper.Map<AirQualityDtoOut>(last)));
+        }
+
+
+        [HttpGet("airquality/index", Name = "GetAirQualityIndex")]
+        [MapToApiVersion("1.0")]
+        public async Task<IActionResult> GetAirQualityIndex([FromQuery] GetAirQualityParameters filter)
         {
             var last = await _repoManager.AirQuality.GetLastAsync(false);
             return Ok(new Response<AirQualityDtoOut>(_mapper.Map<AirQualityDtoOut>(last)));
@@ -68,7 +76,6 @@ namespace RateMyAir.API.Controllers.v1
         /// </summary>
         /// <param name="filter">GetAirQualityParameters filter</param>
         /// <returns>PagedResponse of type AirQualityDtoOut</returns>
-        [AllowAnonymous]
         [HttpGet("airquality", Name = "GetAirQuality")]
         [MapToApiVersion("1.0")]
         public async Task<IActionResult> GetAirQuality([FromQuery] GetAirQualityParameters filter)
@@ -82,10 +89,9 @@ namespace RateMyAir.API.Controllers.v1
         /// </summary>
         /// <param name="model">AirDataDtoIn</param>
         /// <returns>Response of type AirQualityDtoOut</returns>
-        [AllowAnonymous]
         [HttpPost("airquality", Name = "AddAirQuality")]
         [MapToApiVersion("1.0")]
-        public async Task<IActionResult> AddAirQuality([FromHeader] ClientCredentialsDtoIn credentials, [FromBody] AirQualityDtoIn model)
+        public async Task<IActionResult> AddAirQuality([FromBody] AirQualityDtoIn model)
         {
             if (model == null)
             {

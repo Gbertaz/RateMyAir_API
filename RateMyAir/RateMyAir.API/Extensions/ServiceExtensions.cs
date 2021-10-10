@@ -93,33 +93,30 @@ namespace RateMyAir.API.Extensions
                 });
                 c.CustomSchemaIds(i => i.FullName);
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme()
                 {
-                    Description = @"JWT Authorization header using the Bearer scheme. <BR/><BR/> 
-                      Enter 'Bearer' [space] and then your token in the text input below.
-                      <BR/><BR/>Example: 'Bearer 12345abcdef'",
-                    Name = "Authorization",
+                    Name = "ApiKey",
                     In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey
+                    Type = SecuritySchemeType.ApiKey,
+                    Description = "Authorization by x-api-key inside request's header",
+                    Scheme = "ApiKeyScheme"
                 });
 
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                var key = new OpenApiSecurityScheme()
                 {
+                    Reference = new OpenApiReference
                     {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                                {
-                                    Type = ReferenceType.SecurityScheme,
-                                    Id = "Bearer"
-                                },
-                            Scheme = "oauth2",
-                            Name = "Bearer",
-                            In = ParameterLocation.Header,
-                        },
-                        new List<string>()
-                    }
-                });
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "ApiKey"
+                    },
+                    Name = "ApiKey",
+                    In = ParameterLocation.Header
+                };
+                var requirement = new OpenApiSecurityRequirement
+                {
+                   { key, new List<string>() }
+                };
+                c.AddSecurityRequirement(requirement);
 
                 // Set the documentation file path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

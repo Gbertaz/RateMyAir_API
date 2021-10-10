@@ -43,5 +43,14 @@ namespace RateMyAir.API.Extensions
         {
             app.UseMiddleware<ErrorHandlerMiddleware>();
         }
+
+        /// <summary>
+        /// ApiKey Authentication 
+        /// </summary>
+        /// <param name="app"></param>
+        public static void UseApiKeyMiddleware(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<ApiKeyMiddleware>();
+        }
     }
 }

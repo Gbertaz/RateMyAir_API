@@ -1,20 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using NLog;
 using RateMyAir.API.Extensions;
 using RateMyAir.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RateMyAir.API
 {
@@ -35,7 +27,6 @@ namespace RateMyAir.API
             services.ConfigureCors();
             services.ConfigureIISIntegration();
             services.ConfigureLoggerService();
-            //services.ConfigureJwtAuthentication(Configuration);
             services.ConfigureSqlContext(Configuration);
             services.ConfigureModelValidation();
             services.ConfigureSwagger();
@@ -63,10 +54,8 @@ namespace RateMyAir.API
                 app.UseHsts();
             }
 
-            //CAPIRE SE USARE QUESTO O app.UseErrorHandlingMiddleware();
-            //app.ConfigureExceptionHandler(logger);
             app.UseErrorHandlingMiddleware();
-
+            //app.UseApiKeyMiddleware();
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
