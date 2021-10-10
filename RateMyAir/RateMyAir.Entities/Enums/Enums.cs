@@ -8,6 +8,6 @@ namespace RateMyAir.Entities.Enums
 {
     public class Enums
     {
-        public enum AirQualityIndex { Good, Fair, Moderate, Poor, VeryPoor, ExtremelyPoor }
+        public enum Pollutants { Pm25, Pm10 }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RateMyAir.Entities.Models;
-using RateMyAir.Interfaces;
+using RateMyAir.Interfaces.Repositories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

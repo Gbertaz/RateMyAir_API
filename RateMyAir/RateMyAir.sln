@@ -11,12 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateMyAir.Repository", "Rat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateMyAir.Entities", "RateMyAir.Entities\RateMyAir.Entities.csproj", "{6FE2CFAD-72C3-4DB1-A90A-917747D33EB3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "LoggerService\LoggerService.csproj", "{0F1FD34C-64F6-4293-87A5-E174A3F06D16}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{79FCC865-66BC-4F9E-B6E0-57EB78070AE1}"
 	ProjectSection(SolutionItems) = preProject
 		scaffolding.md = scaffolding.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateMyAir.Services", "RateMyAir.Services\RateMyAir.Services.csproj", "{1A03C2BB-D51E-4BA1-94BD-59D79024F891}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,10 +40,10 @@ Global
 		{6FE2CFAD-72C3-4DB1-A90A-917747D33EB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FE2CFAD-72C3-4DB1-A90A-917747D33EB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FE2CFAD-72C3-4DB1-A90A-917747D33EB3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F1FD34C-64F6-4293-87A5-E174A3F06D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F1FD34C-64F6-4293-87A5-E174A3F06D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F1FD34C-64F6-4293-87A5-E174A3F06D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F1FD34C-64F6-4293-87A5-E174A3F06D16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A03C2BB-D51E-4BA1-94BD-59D79024F891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A03C2BB-D51E-4BA1-94BD-59D79024F891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A03C2BB-D51E-4BA1-94BD-59D79024F891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A03C2BB-D51E-4BA1-94BD-59D79024F891}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

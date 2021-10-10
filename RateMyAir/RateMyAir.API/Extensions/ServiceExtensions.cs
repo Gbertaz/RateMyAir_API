@@ -1,5 +1,4 @@
-﻿using LoggerService;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
@@ -7,8 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using RateMyAir.Entities.Models;
-using RateMyAir.Interfaces;
+using RateMyAir.Interfaces.Repositories;
+using RateMyAir.Interfaces.Services;
 using RateMyAir.Repository;
+using RateMyAir.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,12 +32,13 @@ namespace RateMyAir.API.Extensions
         }
 
         /// <summary>
-        /// Injects the Logger service as a singleton service
+        /// Injects the Services
         /// </summary>
         /// <param name="services"></param>
-        public static void ConfigureLoggerService(this IServiceCollection services)
+        public static void ConfigureServices(this IServiceCollection services)
         {
-            services.AddSingleton<ILoggerManager, LoggerManager>();
+            services.AddSingleton<ILoggerService, LoggerService>();
+            services.AddScoped<IPollutionService, PollutionService>();
         }
 
         /// <summary>

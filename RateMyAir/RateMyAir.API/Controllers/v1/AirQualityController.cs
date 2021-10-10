@@ -6,8 +6,10 @@ using RateMyAir.Entities.DTO;
 using RateMyAir.Entities.Exceptions;
 using RateMyAir.Entities.Models;
 using RateMyAir.Entities.RequestFeatures;
-using RateMyAir.Interfaces;
+using RateMyAir.Interfaces.Repositories;
+using RateMyAir.Interfaces.Services;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RateMyAir.API.Controllers.v1
@@ -19,12 +21,18 @@ namespace RateMyAir.API.Controllers.v1
     public class AirQualityController : ControllerBase
     {
         private readonly IRepositoryManager _repoManager;
-        private readonly ILoggerManager _logger;
+        private readonly IPollutionService _pollutionService;
+        private readonly ILoggerService _logger;
         private readonly IMapper _mapper;
 
-        public AirQualityController(IRepositoryManager repositoryManager, IMapper mapper, ILoggerManager logger)
+        public AirQualityController(
+            IRepositoryManager repositoryManager,
+            IPollutionService pollutionService,
+            IMapper mapper,
+            ILoggerService logger)
         {
             _repoManager = repositoryManager;
+            _pollutionService = pollutionService;
             _mapper = mapper;
             _logger = logger;
         }
@@ -62,13 +70,23 @@ namespace RateMyAir.API.Controllers.v1
             return Ok(new Response<AirQualityDtoOut>(_mapper.Map<AirQualityDtoOut>(last)));
         }
 
-
+        /// <summary>
+        /// Get the list of Air Quality indexes
+        /// </summary>
+        /// <param name="filter">GetAirQualityParameters filter</param>
+        /// <returns></returns>
         [HttpGet("airquality/index", Name = "GetAirQualityIndex")]
         [MapToApiVersion("1.0")]
         public async Task<IActionResult> GetAirQualityIndex([FromQuery] GetAirQualityParameters filter)
         {
-            var last = await _repoManager.AirQuality.GetLastAsync(false);
-            return Ok(new Response<AirQualityDtoOut>(_mapper.Map<AirQualityDtoOut>(last)));
+            if(filter.ValidDateRange == false)
+            {
+                _logger.LogError($"GetAirQualityIndex: FromDate {filter.FromDate} can't be less than ToDate {filter.ToDate}.");
+                throw new BadRequestException("FromDate can't be less than ToDate");
+            }
+
+            var pollutionData = await _pollutionService.GetAirQualityIndexAsync(filter.FromDate, filter.ToDate);
+            return Ok(new Response<List<AirQualityIndexDtoOut>>(pollutionData));
         }
 
         /// <summary>
@@ -80,7 +98,13 @@ namespace RateMyAir.API.Controllers.v1
         [MapToApiVersion("1.0")]
         public async Task<IActionResult> GetAirQuality([FromQuery] GetAirQualityParameters filter)
         {
-            var airQuality = _repoManager.AirQuality.GetAirQuality(filter, false);
+            if (filter.ValidDateRange == false)
+            {
+                _logger.LogError($"GetAirQualityIndex: FromDate {filter.FromDate} can't be less than ToDate {filter.ToDate}.");
+                throw new BadRequestException("FromDate can't be less than ToDate");
+            }
+
+            var airQuality = _repoManager.AirQuality.GetAirQuality(filter.FromDate, filter.ToDate, false);
             return Ok(await this.PaginateSourceData<AirQuality, AirQualityDtoOut, DateTime>(airQuality, filter.PageNumber, filter.PageSize, x => x.CreatedAt, _mapper.ConfigurationProvider));
         }
 

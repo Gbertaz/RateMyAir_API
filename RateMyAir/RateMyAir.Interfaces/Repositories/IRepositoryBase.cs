@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace RateMyAir.Interfaces
+namespace RateMyAir.Interfaces.Repositories
 {
     public interface IRepositoryBase<T> where T : class
     {

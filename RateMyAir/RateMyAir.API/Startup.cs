@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
 using RateMyAir.API.Extensions;
-using RateMyAir.Interfaces;
 using System.IO;
 
 namespace RateMyAir.API
@@ -26,7 +25,7 @@ namespace RateMyAir.API
         {
             services.ConfigureCors();
             services.ConfigureIISIntegration();
-            services.ConfigureLoggerService();
+            services.ConfigureServices();
             services.ConfigureSqlContext(Configuration);
             services.ConfigureModelValidation();
             services.ConfigureSwagger();
@@ -43,7 +42,7 @@ namespace RateMyAir.API
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

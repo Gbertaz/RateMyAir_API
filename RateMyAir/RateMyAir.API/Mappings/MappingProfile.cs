@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RateMyAir.Entities.DTO;
+using RateMyAir.Entities.DTO.Queries;
 using RateMyAir.Entities.Models;
 
 namespace RateMyAir.API.Mappings
@@ -8,6 +9,7 @@ namespace RateMyAir.API.Mappings
     {
         public MappingProfile()
         {
+            CreateMap<AirQuality, PollutionForQueryDtoOut>();
             CreateMap<AirQualityDtoIn, AirQuality>();
             CreateMap<AirQuality, AirQualityDtoOut>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AirQualityId));

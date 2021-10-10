@@ -1,5 +1,5 @@
 ﻿using RateMyAir.Entities.Models;
-using RateMyAir.Interfaces;
+using RateMyAir.Interfaces.Repositories;
 using System;
 using System.Threading.Tasks;
 
@@ -10,7 +10,8 @@ namespace RateMyAir.Repository
         private DatabaseContext _context;
         private bool _disposed = false;
 
-        public IAirQualityRepository _airQualityRepository;
+        public IAirQualityRepository _airQuality;
+        public IIndexLevelsRepository _indexLevels;
 
         public RepositoryManager(DatabaseContext repositoryContext)
         {
@@ -19,15 +20,12 @@ namespace RateMyAir.Repository
 
         public IAirQualityRepository AirQuality
         {
-            get
-            {
-                if (_airQualityRepository == null)
-                {
-                    _airQualityRepository = new AirQualityRepository(_context);
-                }
+            get { if (_airQuality == null) _airQuality = new AirQualityRepository(_context); return _airQuality; }
+        }
 
-                return _airQualityRepository;
-            }
+        public IIndexLevelsRepository IndexLevels
+        {
+            get { if (_indexLevels == null) _indexLevels = new IndexLevelsRepository(_context); return _indexLevels; }
         }
 
         public async Task<int> SaveAsync()
