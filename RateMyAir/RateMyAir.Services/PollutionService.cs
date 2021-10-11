@@ -44,34 +44,42 @@ namespace RateMyAir.Services
                 .OrderBy(x => x.CreatedAt)
                 .ProjectTo<PollutionForQueryDtoOut>(_mapper.ConfigurationProvider).ToListAsync();
 
+            Dictionary<DateTime, AirQualityIndexDtoOut> pollutionConcentration = ProcessDailyConcentrationAverage(pollutionData);
+
+            return LookUpAirQualityIndex(pollutionConcentration, indexLevels, true);
+        }
+
+        /// <summary>
+        /// Processes the 24 hours daily pollution concentration. O(n) Time and Space where n is the number of pullution samples
+        /// </summary>
+        /// <param name="pollutionData">Pollution samples</param>
+        /// <returns>Dictionary<DateTime, AirQualityIndexDtoOut></returns>
+        private Dictionary<DateTime, AirQualityIndexDtoOut> ProcessDailyConcentrationAverage(List<PollutionForQueryDtoOut> pollutionData)
+        {
             //Hash table that contains the pollution concentration for each 24 hours
             Dictionary<DateTime, AirQualityIndexDtoOut> pollutionConcentration = new Dictionary<DateTime, AirQualityIndexDtoOut>();
 
-            foreach(PollutionForQueryDtoOut item in pollutionData)
+            foreach (PollutionForQueryDtoOut item in pollutionData)
             {
                 if (pollutionConcentration.ContainsKey(item.CreatedAt.Date))
                 {
                     AirQualityIndexDtoOut dtoOut = pollutionConcentration[item.CreatedAt.Date];
-                    
-                    if(item.Pm25 > 0)
-                    {
-                        dtoOut.Pm25Concentration += item.Pm25;
-                        dtoOut.Pm25Samples += 1;
-                    }
-
-                    if (item.Pm10 > 0)
-                    {
-                        dtoOut.Pm10Concentration += item.Pm10;
-                        dtoOut.Pm10Samples += 1;
-                    }
+                    dtoOut.Pm25RunningSum += item.Pm25;
+                    dtoOut.Pm10RunningSum += item.Pm10;
+                    dtoOut.Pm25Samples += 1;
+                    dtoOut.Pm10Samples += 1;
+                    dtoOut.Pm25Concentration = dtoOut.Pm25RunningSum / dtoOut.Pm25Samples;
+                    dtoOut.Pm10Concentration = dtoOut.Pm10RunningSum / dtoOut.Pm10Samples;
                 }
                 else
                 {
                     AirQualityIndexDtoOut dtoOut = new AirQualityIndexDtoOut();
-                    dtoOut.Pm25Concentration = (item.Pm25 > 0) ? item.Pm25 : 0;
-                    dtoOut.Pm10Concentration = (item.Pm10 > 0) ? item.Pm10 : 0;
-                    dtoOut.Pm25Samples = (item.Pm25 > 0) ? 1 : 0;
-                    dtoOut.Pm10Samples = (item.Pm10 > 0) ? 1 : 0;
+                    dtoOut.Pm25Concentration = 0;
+                    dtoOut.Pm10Concentration = 0;
+                    dtoOut.Pm25RunningSum = item.Pm25;
+                    dtoOut.Pm10RunningSum = item.Pm10;
+                    dtoOut.Pm25Samples = 1;
+                    dtoOut.Pm10Samples = 1;
                     dtoOut.Pm25AirQualityIndex = "";
                     dtoOut.Pm10AirQualityIndex = "";
                     dtoOut.Pm25Color = "";
@@ -81,18 +89,33 @@ namespace RateMyAir.Services
                 }
             }
 
+            return pollutionConcentration;
+        }
+
+        private List<AirQualityIndexDtoOut> LookUpAirQualityIndex(Dictionary<DateTime, AirQualityIndexDtoOut> pollutionConcentration, List<IndexLevel> indexLevels, bool useBinarySearch)
+        {
             //Output list
             List<AirQualityIndexDtoOut> airQualityIndexes = new List<AirQualityIndexDtoOut>();
 
-            //Traverse the hash table again to calculate the concentration average of the 24 hours and associate the air quality index
+            //Constant Time
+            List<IndexLevel> pm25IndexLevels = indexLevels.Where(x => x.Pollutant == Enums.Pollutants.Pm25.ToString()).ToList();
+            List<IndexLevel> pm10IndexLevels = indexLevels.Where(x => x.Pollutant == Enums.Pollutants.Pm10.ToString()).ToList();
+
+            Dictionary<int, int> indexLevelsLookup = null;
+
+            if (useBinarySearch == false)
+            {
+                //Creates the lookup table
+                indexLevelsLookup = ComputeIndexLevelLookUpTable(indexLevels);
+            }
+
+            //Traverse the hash table again to look up the air quality index based on the daily concentration and prepare the output list
             foreach (KeyValuePair<DateTime, AirQualityIndexDtoOut> item in pollutionConcentration)
             {
                 AirQualityIndexDtoOut dailyConcentration = item.Value;
-                dailyConcentration.Pm25Concentration /= dailyConcentration.Pm25Samples;
-                dailyConcentration.Pm10Concentration /= dailyConcentration.Pm10Samples;
 
-                IndexLevel pm25Level = GetAirQualityIndexLevel(indexLevels, dailyConcentration.Pm25Concentration, Enums.Pollutants.Pm25, true);
-                IndexLevel pm10Level = GetAirQualityIndexLevel(indexLevels, dailyConcentration.Pm10Concentration, Enums.Pollutants.Pm10, true);
+                IndexLevel pm25Level = GetAirQualityIndexLevel(indexLevels, indexLevelsLookup, dailyConcentration.Pm25Concentration, useBinarySearch);
+                IndexLevel pm10Level = GetAirQualityIndexLevel(indexLevels, indexLevelsLookup, dailyConcentration.Pm10Concentration, useBinarySearch);
 
                 dailyConcentration.Pm25AirQualityIndex = pm25Level.AirQualityIndex;
                 dailyConcentration.Pm25AirQualityIndexDescription = pm25Level.Description;
@@ -110,40 +133,34 @@ namespace RateMyAir.Services
         /// Get the Air Quality Index level given the 24 hours average pollution concentration
         /// Both algorithms (Binary Search and Lookup table Search) can be considered as O(1) Time complexity because the number of elements on which they operate is constant
         /// Binary Search uses less memory: O(1) Space complexity
-        /// Lookup table uses too much memory: O(n * m) but it is faster: it is a real O(1) Time complexity if the look up table is computed only once  with a singleton
-        /// but if the IndexLevels are changed in the database, the application must be restarted!
+        /// Lookup table uses too much memory: O(n * m) where n is the number of Air Quality index levels (6 elements) and m is the sum of the values of all the 6 ranges
+        /// but it is faster: it is a real O(1) Time complexity
         /// So probably the Binary Search is the best choice
         /// </summary>
         /// <param name="indexLevels">Air quality indexes</param>
+        /// <param name="indexLevelsLookup">Lookup table</param>
         /// <param name="dailyConcentration">Value of the 24 hours average pollution concentration of the given <paramref name="pollutant"/></param>
-        /// <param name="pollutant">Pollutant</param>
         /// <param name="useBinarySearch">Wether to use Binary search to look up for the index level or not</param>
         /// <returns>IndexLevel</returns>
-        private IndexLevel GetAirQualityIndexLevel(List<IndexLevel> indexLevels, double dailyConcentration, Enums.Pollutants pollutant, bool useBinarySearch)
+        private IndexLevel GetAirQualityIndexLevel(List<IndexLevel> indexLevels, Dictionary<int, int> indexLevelsLookup, double dailyConcentration, bool useBinarySearch)
         {
-            //Constant time => negligible as regards of Time and Space complexity
-            List<IndexLevel> pollutantIndexLevels = indexLevels.Where(x => x.Pollutant == pollutant.ToString()).ToList();
-
             if (useBinarySearch)
             {
                 //Binary search is O(log(n)) Time complexity but in this case can be treated as O(1) because n is constant (6 elements)
-                return IndexLevelBinarySearch(pollutantIndexLevels, dailyConcentration);
+                return IndexLevelBinarySearch(indexLevels, dailyConcentration);
             }
             else
             {
-                //Creates the lookup table in O(n * m) where n is the number of index levels (6 elements) and m is the sum of the values of all the 6 ranges
-                Dictionary<int, int> pm10IndexLevelLookUp = ComputeIndexLevelLookUpTable(pollutantIndexLevels);
-
                 //O(1) Time complexity because it is a lookup in a hash table
-                return pollutantIndexLevels[pm10IndexLevelLookUp[(int)dailyConcentration]];
+                return indexLevels[indexLevelsLookup[(int)dailyConcentration]];
             }
         }
 
         /// <summary>
-        /// Computes the Lookup table by associating the daily pollution concentration value to the Air quality index's index (no pun intended)
+        /// Computes the Lookup table by associating the daily pollution concentration value to the index of the Air quality range in which the concentration falls into
         /// </summary>
         /// <param name="indexLevels">Air quality indexes</param>
-        /// <returns>Hash table where the key is the pollution concentration value and the value is the Air quality index's index</returns>
+        /// <returns>Hash table where the key is the 24 hours average pollution concentration and the value is the index of the Air quality range in which the concentration falls into</returns>
         private Dictionary<int, int> ComputeIndexLevelLookUpTable(List<IndexLevel> indexLevels)
         {
             Dictionary<int, int> indexLevelLookUp = new Dictionary<int, int>();

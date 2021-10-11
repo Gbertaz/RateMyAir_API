@@ -4,6 +4,8 @@ namespace RateMyAir.Entities.DTO
 {
     public class AirQualityIndexDtoOut
     {
+        public double Pm25RunningSum { get; set; }
+        public double Pm10RunningSum { get; set; }
         public double Pm25Concentration { get; set; }
         public double Pm10Concentration { get; set; }
         public int Pm25Samples { get; set; }
