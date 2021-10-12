@@ -29,6 +29,7 @@ Source: https://www.eea.europa.eu
 
 # Planned features and developments
 
+* The database structure and the APIs only support one sensor which collects temperature (indoor and outdoor), humidity, pressure and particulate matter pollution. A future development is to make everything more generic to support *n* sensors
 * The paged output should contain the link to the next and previous page
 * Data caching
 * Rate limiting and Throttling
