@@ -6,7 +6,7 @@ It exposes the services to manipulate and access the Air data (temperature, humi
 
 Developed in **.NET Core 5** using the **Repository pattern**, it is designed to be lightweight and efficient paying special attention in complying with Microsoft and HTTP standards in order to be robust, understandable and easily consumable by any client. The goal is to run it on a low-performing hardware such as the Raspberry Pi 4.
 
-## Air Quality Index
+# Air Quality Index
 
 The Air Quality Index level is based on the concentration values of the following pollutants in µg/m3:
 
@@ -24,7 +24,7 @@ The Air Quality Index level is based on the concentration values of the followin
 * [API Specifications](doc/ApiSpecs.md)
 * [Solution Specifications](doc/SolutionSpecs.md)
 
-## Planned features and developments
+# Planned features and developments
 
 * The paged output should contain the link to the next and previous page
 * Data caching
