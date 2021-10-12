@@ -19,6 +19,8 @@ The Air Quality Index level is based on the concentration values of the followin
 | PM 2.5 | 0-10  | 10-20  | 20-25 | 25-50 | 50-75 | 75-800 |
 | PM 10  | 0-20 | 20-40 | 40-50 | 50-100 | 100-150 | 150-1200 |
 
+Source: https://www.eea.europa.eu
+
 # Table of Contents
 
 * [API Specifications](doc/ApiSpecs.md)
