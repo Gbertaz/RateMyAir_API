@@ -25,7 +25,7 @@ Source: https://www.eea.europa.eu
 
 * [API Specifications](doc/ApiSpecs.md)
 * [Solution Specifications](doc/SolutionSpecs.md)
-* [Details of the Algorithm](doc/Algorithm.md)
+* [Details of the Air Quality Index algorithm](doc/Algorithm.md)
 
 # Planned features and developments
 
