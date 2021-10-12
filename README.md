@@ -23,6 +23,7 @@ The Air Quality Index level is based on the concentration values of the followin
 
 * [API Specifications](doc/ApiSpecs.md)
 * [Solution Specifications](doc/SolutionSpecs.md)
+* [Details of the Algorithm](doc/Algorithm.md)
 
 # Planned features and developments
 
