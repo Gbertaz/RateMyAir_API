@@ -1,4 +1,4 @@
-# Details of the algorithm
+# Details of the Air Quality Index algorithm
 
 The API reponsible of calculating and returning the Air Quality index is available at the following endpoint
 
@@ -43,7 +43,7 @@ The **Binary Search** is slower but doesn't require extra space, however it alwa
 
 ## Improvement 1
 
-The **Hash Table** Space complexity can be improved by excluding the last two ranges because it's where most of the values are, lowering the required Space from 2000 to 225 *double* values. 
+The **Hash Table** Space complexity can be improved by excluding the last Pm2.5's range and the last PM10's range because it's where most of the values are, lowering the required Space from 2000 to 225 *double* values. 
 
 ## Improvement 2
 
@@ -53,4 +53,4 @@ Develop a **Batch** program that runs once a day just after midnight which proce
 
 I haven't tested it yet but given that the number of samples is not outrageous, the **Binary Search** is probably the best choice in this particular case. Any suggestion for improvements is very welcome!
 
-To give some numbers: the sensors are collecting data every 15 minutes resulting in 96 samples per day that means 35040 samples in one year. Let's suppose the Client request an entire year of data, the algorithm processes 35040 in [STEP 1](#step-1) condensing them up in 365 values (the averages for each day). The [STEP 2](#step-2) then executes 365 times a constant time **Binary Search** or a lookup in a **Hash Table**.
+To give some numbers: the sensors are collecting data every 15 minutes resulting in 96 samples per day that means 35040 samples in one year. Let's suppose the Client requests an entire year of data, the algorithm processes 35040 in [STEP 1](#step-1) condensing them up in 365 values (the averages for each day). The [STEP 2](#step-2) then executes 365 times a constant time **Binary Search** or a lookup in a **Hash Table**.
