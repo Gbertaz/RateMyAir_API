@@ -10,6 +10,7 @@
 * Supports API versioning
 * Swagger documentation
 * Mapping entities to Data Transfer Objects using AutoMapper
+* Data caching in memory
 
 ## Dependencies
 
