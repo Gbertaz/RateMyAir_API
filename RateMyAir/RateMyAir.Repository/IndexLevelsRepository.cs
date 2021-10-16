@@ -10,7 +10,7 @@ namespace RateMyAir.Repository
     {
         public IndexLevelsRepository(DatabaseContext repositoryContext) : base(repositoryContext) { }
 
-        public async Task<List<IndexLevel>> GetLevels()
+        public async Task<List<IndexLevel>> GetLevelsAsync()
         {
             return await FindAll(false).ToListAsync();
         }

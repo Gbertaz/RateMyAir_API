@@ -6,6 +6,6 @@ namespace RateMyAir.Interfaces.Repositories
 {
     public interface IIndexLevelsRepository
     {
-        Task<List<IndexLevel>> GetLevels();
+        Task<List<IndexLevel>> GetLevelsAsync();
     }
 }

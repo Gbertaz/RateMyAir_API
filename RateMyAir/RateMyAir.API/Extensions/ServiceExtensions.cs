@@ -38,6 +38,8 @@ namespace RateMyAir.API.Extensions
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerService, LoggerService>();
+            services.AddSingleton<IMemoryCacheService, MemoryCacheService>();
+            services.AddScoped<IAirQualityIndexService, AirQualityIndexService>();
             services.AddScoped<IPollutionService, PollutionService>();
         }
 

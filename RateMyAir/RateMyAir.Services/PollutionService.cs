@@ -17,11 +17,13 @@ namespace RateMyAir.Services
     public class PollutionService : IPollutionService
     {
         private readonly IRepositoryManager _repoManager;
+        private readonly IAirQualityIndexService _airQualityIndexService;
         private readonly IMapper _mapper;
 
-        public PollutionService(IRepositoryManager repoManager, IMapper mapper)
+        public PollutionService(IRepositoryManager repoManager, IAirQualityIndexService airQualityIndexService, IMapper mapper)
         {
             _repoManager = repoManager;
+            _airQualityIndexService = airQualityIndexService;
             _mapper = mapper;
         }
 
@@ -36,8 +38,8 @@ namespace RateMyAir.Services
         /// <returns>List of AirQualityIndexDtoOut</returns>
         public async Task<List<AirQualityIndexDtoOut>> GetAirQualityIndexAsync(DateTime fromDate, DateTime toDate)
         {
-            //Air quality index map table. The data set is already sorted
-            List<IndexLevel> indexLevels = await _repoManager.IndexLevels.GetLevels();
+            //Get the Air Quality index levels either from database or memory cache
+            List<IndexLevel> indexLevels = await _airQualityIndexService.GetAirQualityLevelsAsync();
 
             //Get the list of PollutionForQueryDtoOut between the specified range of dates
             List<PollutionForQueryDtoOut> pollutionData = await _repoManager.AirQuality.GetAirQuality(fromDate, toDate, false)
