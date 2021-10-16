@@ -77,7 +77,7 @@ namespace RateMyAir.API.Controllers.v1
         /// <returns></returns>
         [HttpGet("airquality/index", Name = "GetAirQualityIndex")]
         [MapToApiVersion("1.0")]
-        public async Task<IActionResult> GetAirQualityIndex([FromQuery] GetAirQualityParameters filter)
+        public async Task<IActionResult> GetAirQualityIndex([FromQuery] GetAirQualityIndexParameters filter)
         {
             if(filter.ValidDateRange == false)
             {

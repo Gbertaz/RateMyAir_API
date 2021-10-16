@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace RateMyAir.Entities.DTO
 {
     public class AirQualityIndexDtoOut
     {
+        [JsonIgnore]
         public double Pm25RunningSum { get; set; }
+        [JsonIgnore]
         public double Pm10RunningSum { get; set; }
         public double Pm25Concentration { get; set; }
         public double Pm10Concentration { get; set; }
