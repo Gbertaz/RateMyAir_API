@@ -10,11 +10,11 @@ Returns the Air Quality Index of each day between the *DateFrom* and *DateTo* pa
 
 The implementation can be found in *RateMyAir.Services.PollutionService.cs* class.
 
-The first part of the algorithm hits the database to fetch the necessary data by reading the Air Quality index levels stored in the *IndexLevels* table
+The first part of the algorithm hits the database to fetch the necessary data by reading the Air Quality index levels stored in the *IndexLevels* table. To make things even faster and reduce unnecessary database access, this query is executed only once a day, the list of *IndexLevels* are cached in memory for a fast access.
 
 ```
-//Air quality index map table. The data set is already sorted
-List<IndexLevel> indexLevels = await _repoManager.IndexLevels.GetLevels();
+//Get the Air Quality index levels either from database or memory cache
+List<IndexLevel> indexLevels = await _airQualityIndexService.GetAirQualityLevelsAsync();
 ```
 
 A second query is executed to fetch the PM2.5 and PM10 pollution from *AirData* table filtering out the values between *DateFrom* and *DateTo*
