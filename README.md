@@ -2,7 +2,7 @@
 
 This repository contains the implementation of the **Rest APIs** for the project **RateMyAir**.  
 
-It exposes the services to manipulate and access the Air data (temperature, humidity, pressure and particulate matter pollution) collected by different sensors (more on that soon) to understand more about Air Quality where I live.  
+It exposes the services to manipulate and access the Air data (temperature, humidity, pressure and particulate matter pollution) measured by [RateMyAir_FW](https://github.com/Gbertaz/RateMyAir_FW) to understand more about Air Quality where I live.  
 
 Developed in **.NET Core 5** using the **Repository pattern**, it is designed to be lightweight and efficient paying special attention in complying with Microsoft and HTTP standards in order to be robust, understandable and easily consumable by any client. The goal is to run it on a low-performing hardware such as the Raspberry Pi 4.
 
