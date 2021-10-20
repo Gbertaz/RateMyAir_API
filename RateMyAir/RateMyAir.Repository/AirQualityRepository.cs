@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RateMyAir.Entities.Models;
 using RateMyAir.Interfaces.Repositories;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,14 +20,14 @@ namespace RateMyAir.Repository
             return FindByCondition(x => x.AirQualityId > 0, trackChanges).OrderByDescending(x => x.CreatedAt).FirstOrDefaultAsync();
         }
 
-        public IQueryable<AirQuality> GetAirQuality(DateTime fromDate, DateTime toDate, bool trackChanges)
+        public IQueryable<AirQuality> GetAllAirQuality(bool trackChanges)
         {
-            return FindByCondition(x => x.CreatedAt >= fromDate && x.CreatedAt <= toDate, trackChanges);
+            return FindAll(trackChanges);
         }
 
-        public void CreateAirQuality(AirQuality entity)
+        public void InsertAirQuality(AirQuality model)
         {
-            Create(entity);
+            Create(model);
         }
 
     }

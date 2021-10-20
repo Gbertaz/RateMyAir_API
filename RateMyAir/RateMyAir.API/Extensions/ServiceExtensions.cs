@@ -39,8 +39,8 @@ namespace RateMyAir.API.Extensions
         {
             services.AddSingleton<ILoggerService, LoggerService>();
             services.AddSingleton<IMemoryCacheService, MemoryCacheService>();
-            services.AddScoped<IAirQualityIndexService, AirQualityIndexService>();
-            services.AddScoped<IPollutionService, PollutionService>();
+            services.AddScoped<IAirQualityLevelsService, AirQualityLevelsService>();
+            services.AddScoped<IAirQualityService, AirQualityService>();
         }
 
         /// <summary>

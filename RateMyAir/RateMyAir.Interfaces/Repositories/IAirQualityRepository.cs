@@ -9,7 +9,7 @@ namespace RateMyAir.Interfaces.Repositories
     {
         Task<AirQuality> GetAirQualityByIdAsync(int airQualityId, bool trackChanges);
         Task<AirQuality> GetLastAsync(bool trackChanges);
-        IQueryable<AirQuality> GetAirQuality(DateTime fromDate, DateTime toDate, bool trackChanges);
-        void CreateAirQuality(AirQuality entity);
+        IQueryable<AirQuality> GetAllAirQuality(bool trackChanges);
+        void InsertAirQuality(AirQuality model);
     }
 }

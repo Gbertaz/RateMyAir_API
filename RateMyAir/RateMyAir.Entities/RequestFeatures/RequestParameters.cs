@@ -21,13 +21,6 @@ namespace RateMyAir.Entities.RequestFeatures
         }
     }
 
-    public class GetAirQualityIndexParameters
-    {
-        public DateTime FromDate { get; set; } = DateTime.Today.AddDays(-1).AddSeconds(1);
-        public DateTime ToDate { get; set; } = DateTime.Today.AddDays(1).AddSeconds(-1);
-        public bool ValidDateRange => ToDate >= FromDate;
-    }
-
     public class GetAirQualityParameters : RequestParameters
     {
         public DateTime FromDate { get; set; } = DateTime.Today.AddDays(-1).AddSeconds(1);
