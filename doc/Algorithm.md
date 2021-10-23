@@ -32,7 +32,7 @@ For each day, starting from *DateFrom*, the algorithm groups all the PM2.5 and P
 ### STEP 2
 The final step is the lookup of the Air Quality Index given the 24 hours average pollution concentration: traverse the hash table, for each key/value pair get the corresponding index level searching the concentration in the array of ranges. 
 
-I have implemented the lookup using a **Binary Search** O(log(n)) Time where n is the number of Air Quality Index levels (12 in this case), O(1) Space
+I have implemented the lookup using a **Binary Search** O(log(n)) Time complexity where n is the number of Air Quality Index levels. O(1) Space complexity.  
 However it always run on a fixed number of elements (12 in this case) so we can consider O(log(12)) as constant => O(1).
 
 ## Possible improvement
@@ -43,4 +43,4 @@ Develop a **Batch** program that runs once a day just after midnight which proce
 
 I haven't tested it yet but given that the number of samples is not outrageous, the **Binary Search** is probably the best choice in this particular case. Any suggestion for improvements is very welcome!
 
-To give some numbers: the sensors are collecting data every 15 minutes resulting in 96 samples per day that means 35040 samples in one year. Let's suppose the Client requests an entire year of data, the algorithm processes 35040 in [STEP 1](#step-1) condensing them up in 365 values (the averages for each day). The [STEP 2](#step-2) then executes 365 times a constant time **Binary Search** or a lookup in a **Hash Table**.
+To give some numbers: the sensors are collecting data every 15 minutes resulting in 96 samples per day that means 35040 samples in one year. Let's suppose the Client requests an entire year of data, the algorithm processes 35040 in [STEP 1](#step-1) condensing them up in 365 values (the averages for each day). The [STEP 2](#step-2) then executes 365 times a constant time **Binary Search**.
