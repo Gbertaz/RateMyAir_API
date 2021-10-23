@@ -13,9 +13,10 @@ namespace RateMyAir.API
     {
         public Startup(IConfiguration configuration)
         {
+            Configuration = configuration;
             //Provide a path to the Log's configuration file.
             LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
-            Configuration = configuration;
+            NLog.Extensions.Logging.ConfigSettingLayoutRenderer.DefaultConfiguration = configuration;
         }
 
         public IConfiguration Configuration { get; }
