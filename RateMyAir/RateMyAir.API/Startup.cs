@@ -46,6 +46,8 @@ namespace RateMyAir.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAppHeaders();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -56,15 +58,11 @@ namespace RateMyAir.API
             }
 
             app.UseErrorHandlingMiddleware();
-            //app.UseApiKeyMiddleware();
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
-            //Enable the JWT-based authentication service. 
             app.UseAuthentication();
             app.UseCors("CorsPolicy");
-            app.UseAppHeaders();
             app.UseRouting();
             app.UseAuthorization();
             app.UseSwaggerExtension();

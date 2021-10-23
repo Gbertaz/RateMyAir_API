@@ -33,6 +33,17 @@ namespace RateMyAir.API.Extensions
             {
                 ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.All
             });
+
+            app.Use(async (context, next) =>
+            {
+                var forwardedPath = context.Request.Headers["X-Forwarded-Path"].FirstOrDefault();
+                if (!string.IsNullOrEmpty(forwardedPath))
+                {
+                    context.Request.PathBase = forwardedPath;
+                }
+
+                await next();
+            });
         }
 
         /// <summary>

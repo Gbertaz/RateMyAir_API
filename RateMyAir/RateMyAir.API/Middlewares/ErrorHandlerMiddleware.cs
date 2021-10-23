@@ -33,7 +33,7 @@ namespace RateMyAir.API.Middlewares
                 {
                     case UnauthorizedException e:
                         response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                        response.Headers.Add("WWW-Authenticate", "Bearer error=\"invalid_token\"");
+                        response.Headers.Add("WWW-Authenticate", "ApyKey=\"invalid_token\"");
                         responseModel.Success = true;
                         break;
                     case ForbiddenException e:
