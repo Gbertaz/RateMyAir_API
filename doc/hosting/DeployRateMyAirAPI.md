@@ -93,13 +93,22 @@ sudo nano /var/log/syslog
 
 # Update the app
 
-In case you need to deploy and updated version you have to stop the services:
+In case you need to deploy an update of the app, you have to stop the services:
 
 ```
 sudo service nginx stop
 sudo systemctl stop RateMyAir.API
 ```
-and then start the services again:
+
+then make the app executable again:
+
+```
+cd /home/pi/RateMyAir/app
+chmod 755 ./RateMyAir.API
+./RateMyAir.API
+```
+
+and finally start the services:
 
 ```
 sudo service nginx start
