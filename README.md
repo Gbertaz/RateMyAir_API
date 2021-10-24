@@ -48,7 +48,7 @@ If everything has been set up following all the steps with the same naming conve
 https://yourdomain.duckdns.org/ratemyair/api
 ```
 
-All the endpoints are authenticated using the API Key method thus make sure to pass the API KEY specified in [appsettings.Production.json](https://github.com/Gbertaz/RateMyAir_API/blob/master/RateMyAir/RateMyAir.API/appsettings.Production.json) in the header of the calls.
+All the endpoints are authenticated using the API Key method thus make sure to pass the API KEY specified in [appsettings.Production.json](https://github.com/Gbertaz/RateMyAir_API/blob/master/RateMyAir/RateMyAir.API/appsettings.Production.json) in the header of the calls. The header's key to be added is **ApiKey**.
 
 # Table of Contents
 
