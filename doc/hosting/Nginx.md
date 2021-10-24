@@ -22,14 +22,14 @@ sudo nano /etc/nginx/sites-available/default
 look for the section starting with *location /* and modify it to look like the following:
 
 ```
-location /RateMyAir/ {
+location /ratemyair/ {
     proxy_pass http://localhost:5000/;
     proxy_http_version 1.1;
     proxy_set_header Connection keep-alive;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Host $http_host;
     proxy_set_header X-Forwarded-Proto http;
-    proxy_set_header X-Forwarded-Path /RateMyAir;
+    proxy_set_header X-Forwarded-Path /ratemyair;
 }
 ```
 Save the file by pressing *CTRL + X* then Y and ENTER. Then reload nginx with the following:
