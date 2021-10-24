@@ -1,14 +1,10 @@
 ## Project Specifications
 
 * Database First approach
-* Output in Json or Xml format
-* Output pagination and filtering
 * Global error handling
-* ApiKey Authentication method for clients
 * SQLite database
 * Logging on file system
 * Supports API versioning
-* Swagger documentation
 * Mapping entities to Data Transfer Objects using AutoMapper
 * In memory data caching
 
@@ -40,3 +36,11 @@ Scaffold-DbContext "Data Source=<path to your sqlite database>" Microsoft.Entity
 ```
 
 * Open "DatabaseContext.cs" class in "RateMyAir.Entities.Models" and delete the "OnConfiguring" method
+
+## Compilation 
+
+Compile the project for release on linux based system with this command:
+
+```
+dotnet publish -c Release -r linux-arm
+```
