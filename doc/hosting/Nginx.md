@@ -31,11 +31,6 @@ location /RateMyAir/ {
     proxy_set_header X-Forwarded-Proto http;
     proxy_set_header X-Forwarded-Path /RateMyAir;
 }
-
-#### Important notes
-
-In case you [Install Letsencrypt SSL certificate](#install-letsencrypt-ssl-certificate) (highly recommended) the url specified in *proxy_pass* must start with *https* and the server must listen on port 443 instead of 80. As shown in picture...
-
 ```
 Save the file by pressing *CTRL + X* then Y and ENTER and reload nxing with the following:
 
