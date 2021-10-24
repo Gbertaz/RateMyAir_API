@@ -26,7 +26,7 @@ Open *RateMyAir_API* project in Visual Studio and compile it by running the foll
 dotnet publish -c Release -r linux-arm
 ```
 
-Copy all files from *\RateMyAir_API\RateMyAir\RateMyAir.API\bin\Release\net5.0\linux-arm\publish* to the Raspberry in the *app* directory created in the [previous step](#deploy-and-run-ratemyair_API).
+Copy all files from *\RateMyAir_API\RateMyAir\RateMyAir.API\bin\Release\net5.0\linux-arm\publish* to the Raspberry in the *app* directory created previously.
 Also make sure to copy the *airquality.sqlite* database from *\RateMyAir_API\Database* to the *database* folder.
 
 Now make the *RateMyAir.API* binary executable: open terminal and run:
