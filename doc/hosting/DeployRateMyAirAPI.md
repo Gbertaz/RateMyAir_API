@@ -2,14 +2,15 @@
 
 **Important**: make sure to create the folders with the exact following names (case included) and path because the *RateMyAir_API* project and all the configurations provided in this guide expect to find the application, database and logs folder in these exact location.
  
-Create a folder named *RateMyAir* in the following path */home/pi/* and then create 3 folders named *app*, *database* and *logs* in it. You should end up with a structure like the following:
+Create a folder named *RateMyAir* in the following path: */home/pi/*  
+Then create 3 folders named *app*, *database* and *logs* in it. You should end up with a structure like the following:
 
 * /home/pi/RateMyAir/
 * /home/pi/RateMyAir/app/
 * /home/pi/RateMyAir/database/
 * /home/pi/RateMyAir/logs/
 
-#### Install dependencies
+## Install dependencies
 
 Even if the app is self-contained, it is necessary to install some packages with the following command:
 
@@ -18,7 +19,7 @@ sudo apt-get update
 sudo apt-get install curl libunwind8 gettext apt-transport-https
 ```
 
-#### Compile and Deploy the .NET Core 5 API Project
+## Compile and Deploy the .NET Core 5 API Project
 
 Open *RateMyAir_API* project in Visual Studio and compile it by running the following command in package manager console:
 
@@ -26,8 +27,8 @@ Open *RateMyAir_API* project in Visual Studio and compile it by running the foll
 dotnet publish -c Release -r linux-arm
 ```
 
-Copy all files from *\RateMyAir_API\RateMyAir\RateMyAir.API\bin\Release\net5.0\linux-arm\publish* to the Raspberry in the *app* directory created previously.
-Also make sure to copy the *airquality.sqlite* database from *\RateMyAir_API\Database* to the *database* folder.
+Copy all files from *..\RateMyAir_API\RateMyAir\RateMyAir.API\bin\Release\net5.0\linux-arm\publish* to the Raspberry in the *app* directory created previously.
+Also make sure to copy the *airquality.sqlite* database from *..\RateMyAir_API\Database* to the *database* folder.
 
 Now make the *RateMyAir.API* binary executable: open terminal and run:
 
@@ -43,7 +44,7 @@ Run the app like this:
 ```
 
 
-#### Run the app as a service
+## Run the app as a service
 
 Running the app as a service ensures that it gets automatically started at startup or restarted in case of a crash. Open the terminal and run:
 
