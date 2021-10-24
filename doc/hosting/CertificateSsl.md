@@ -2,7 +2,7 @@
 
 Secure our API with an SSL certificate. I am using Let's encrypt because it is free.
 
-Before installing the certificate, make sure that port TCP/80 and port TCP/443 are correctly forwarded to point to your Raspberry static IP address configured in this step [Setup a static IP Address](#setup-a-static-ip-address). I am not gonna dig into configuring the port forwarding because every router is different, there are a lot of tutorials on how to do that.
+Before installing the certificate, make sure that port TCP/80 and port TCP/443 are correctly forwarded to point to your Raspberry static IP address configured in this step [Setup a static IP Address](StaticIp.md). I am not gonna dig into configuring the port forwarding because every router is different, there are a lot of tutorials on how to do that.
 
 ### Installing snap
 
@@ -31,7 +31,7 @@ This command will install the certificate and automatically edit the nginx confi
 sudo certbot --nginx
 ```
 
-When prompted to enter the domain name, use the domain created in Duckdns [Install a dynamic DNS](#install-a-dynamic-dns). For example:
+When prompted to enter the domain name, use the domain created in Duckdns [Install a dynamic DNS](DynamicDns.md). For example:
 
 ```
 <YOUR DOMAIN NAME>.duckdns.org
