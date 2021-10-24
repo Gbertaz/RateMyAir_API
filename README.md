@@ -21,6 +21,25 @@ The Air Quality Index level is based on the concentration values of the followin
 
 Source: https://www.eea.europa.eu
 
+# Hosting a .NET Core 5 application on a Raspberry Pi
+
+This is a step by step guide on how to host a .NET Core 5 REST API on a Raspberry Pi and make it securely accessible outside your Local Area Network from anywhere in the world.
+
+I am deploying the application on a Raspberry Pi 4 Model B which is powerful enough to host the APIs as long as you don't expect to handle thousands of requests.
+In any case to run a .NET Core app you need at least a Raspberry Pi 2 with an ARMv7 processor.
+
+I am assuming that we start from a new fresh installation of Raspbian, we are going to deploy a self-contained app so we don't need to install .NET Core but we still need to do quite a few steps:
+Some of these steps are optional, if you don't want to make the API accessible from outside your LAN you can skip the steps 7 and 8.
+
+1. [Install Raspberry Pi OS](doc/hosting/InstallDebian.md)
+2. [Setup a static IP Address](doc/hosting/StaticIp.md)
+3. [Install VNC server (Optional)](doc/hosting/VncServer.md)
+4. [Install SQLite browser](doc/hosting/SqliteBrowser.md)
+5. [Install nginx web server](doc/hosting/Nginx.md)
+6. [Deploy and run RateMyAir_API](doc/hosting/DeployRateMyAirAPI.md)
+7. [Install a dynamic DNS (Optional)](doc/hosting/DynamicDns.md)
+8. [Install Letsencrypt SSL certificate (Optional)](doc/hosting/CertificateSsl.md)
+
 # Table of Contents
 
 * [API Specifications](doc/ApiSpecs.md)
