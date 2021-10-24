@@ -99,7 +99,7 @@ In case you need to deploy and updated version you have to stop the services:
 sudo service nginx stop
 sudo systemctl stop RateMyAir.API
 ```
-and then reboot the Raspberry or start the services again:
+and then start the services again:
 
 ```
 sudo service nginx start
