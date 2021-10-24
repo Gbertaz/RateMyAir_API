@@ -32,7 +32,7 @@ location /RateMyAir/ {
     proxy_set_header X-Forwarded-Path /RateMyAir;
 }
 ```
-Save the file by pressing *CTRL + X* then Y and ENTER and reload nxing with the following:
+Save the file by pressing *CTRL + X* then Y and ENTER. Then reload nginx with the following:
 
 ```
 sudo nginx -s reload
