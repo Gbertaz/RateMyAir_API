@@ -40,6 +40,16 @@ Some of these steps are optional, if you don't want to make the API accessible f
 7. [Install a dynamic DNS (Optional)](doc/hosting/DynamicDns.md)
 8. [Install Letsencrypt SSL certificate (Optional)](doc/hosting/CertificateSsl.md)
 
+## Test the APIs
+
+If everything has been set up following all the steps with the same naming conventions, the APIs should be available at the following URL:
+
+```
+https://yourdomain.duckdns.org/ratemyair/api
+```
+
+All the endpoints are authenticated using the API Key method thus make sure to pass the API KEY specified in [appsettings.Production.json](https://github.com/Gbertaz/RateMyAir_API/blob/master/RateMyAir/RateMyAir.API/appsettings.Production.json) in the header of the calls.
+
 # Table of Contents
 
 * [API Specifications](doc/ApiSpecs.md)
