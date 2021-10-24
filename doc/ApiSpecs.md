@@ -1,6 +1,11 @@
-## API Output
+## API Specifications
 
-All the APIs use the following Json output structures depending on whether the response is paged or not:
+* Output in Json or Xml format
+* Output pagination and filtering
+* ApiKey Authentication method for clients
+* Swagger documentation
+
+All the APIs output the following Json structures depending on whether the response is paged or not:
 
 #### Response
 
