@@ -4,7 +4,7 @@ Secure our API with an SSL certificate. I am using Let's encrypt because it is f
 
 Before installing the certificate, make sure that port TCP/80 and port TCP/443 are correctly forwarded to point to your Raspberry static IP address configured in this step [Setup a static IP Address](StaticIp.md). I am not gonna dig into configuring the port forwarding because every router is different, there are a lot of tutorials on how to do that.
 
-### Installing snap
+## Installing snap
 
 ```
 $ sudo apt update
@@ -12,13 +12,13 @@ $ sudo apt install snapd
 ```
 
 Now reboot your Raspberry in order to properly update the system.
-After reboot install install the core snap in order to get the latest snapd:
+After reboot install the core snap in order to get the latest snapd:
 
 ```
 sudo snap install core
 ```
 
-### Install certbot
+## Install certbot
 
 ```
 sudo snap install --classic certbot
