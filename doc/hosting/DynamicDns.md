@@ -63,7 +63,7 @@ sudo service cron start
 Now you should be able to make a request even outside your LAN. You can test it by requesting the last AirQuality record in the database using Postman. If the database is empty you should at least get a HTTP 200 OK response code to confirm that the application and the DNS are working correctly. The request url is:
 
 ```
-http://<YOUR DOMAIN NAME>.duckdns.org/RateMyAir/api/airquality/last
+http://<YOUR DOMAIN NAME>.duckdns.org/ratemyair/api/airquality/last
 ```
 
 **Do not forget that the URL is case sensitive**
