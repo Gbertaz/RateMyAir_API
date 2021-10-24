@@ -5,7 +5,7 @@ I am using Duckdns which is free and works great!
 
 Create a free account [Duckdns](https://www.duckdns.org/) and create a domain name for example: *ratemyair*.
 
-Now create a folder named *duckdns* in the following path of your Raspberry */home/pi/*.
+Now create a folder named *duckdns* in the following path of your Raspberry: */home/pi/*  
 
 Open the terminal and run:
 
@@ -17,10 +17,10 @@ sudo nano duck.sh
 enter the following line:
 
 ```
-echo url="https://www.duckdns.org/update?domains=<YOUR DOMAIN NAME>&token=<YOUR TOKEN>&ip=" | curl -k -o /home/pi/duckdns/duck.log -K -
+echo url="https://www.duckdns.org/update?domains=YOUR-DOMAIN-NAME&token=YOUR-TOKEN&ip=" | curl -k -o /home/pi/duckdns/duck.log -K -
 ```
 
-Make sure to replace **<YOUR DOMAIN NAME>** with the domain name you created and **<YOUR TOKEN>** with the token you can find in the Duckdns dashboard.
+Make sure to replace **YOUR-DOMAIN-NAME** with the domain name you created and **YOUR-TOKEN** with the token you can find in the Duckdns dashboard.
 
 Save the file by pressing *CTRL + X* then Y and ENTER
 
