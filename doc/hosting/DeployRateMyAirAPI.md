@@ -94,7 +94,7 @@ sudo nano /var/log/syslog
 
 # Update the app
 
-In case you need to update the application check out how to [Easily deploy the application](../ScpDeploy.md) from your computer to the Raspberry Pi using SSH and SCP (Secure Copy).  
+In case you need to update the application check out how to [Easily deploy](../ScpDeploy.md) from your computer to the Raspberry Pi using SSH and SCP (Secure Copy).  
 
 After copying the files in the temporary folder */home/pi/RateMyAir/deploy/* you have to stop the services:
 
