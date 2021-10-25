@@ -3,11 +3,12 @@
 **Important**: make sure to create the folders with the exact following names (case included) and path because the *RateMyAir_API* project and all the configurations provided in this guide expect to find the application, database and logs folder in these exact location.
  
 Create a folder named *RateMyAir* in the following path: */home/pi/*  
-Then create 3 folders named *app*, *database* and *logs* in it. You should end up with a structure like the following:
+Then create 4 folders in it named *app*, *database*, *deploy* and *logs* in it. You should end up with a structure like the following:
 
 * /home/pi/RateMyAir/
 * /home/pi/RateMyAir/app/
 * /home/pi/RateMyAir/database/
+* /home/pi/RateMyAir/deploy/
 * /home/pi/RateMyAir/logs/
 
 ## Install dependencies
@@ -93,14 +94,16 @@ sudo nano /var/log/syslog
 
 # Update the app
 
-In case you need to deploy an update of the app, you have to stop the services:
+In case you need to update the application check out how to [Easily deploy the application](doc/ScpDeploy.md) from your computer to the Raspberry Pi using SSH and SCP (Secure Copy).  
+
+After copying the files in the temporary folder */home/pi/RateMyAir/deploy/* you have to stop the services:
 
 ```
 sudo service nginx stop
 sudo systemctl stop RateMyAir.API
 ```
 
-then make the app executable again:
+next, copy the files from the temporary folder to the */home/pi/RateMyAir/app/* folder and make the app executable again:
 
 ```
 cd /home/pi/RateMyAir/app
