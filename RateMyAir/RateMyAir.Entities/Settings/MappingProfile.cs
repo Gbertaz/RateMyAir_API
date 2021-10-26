@@ -3,7 +3,7 @@ using RateMyAir.Entities.DTO;
 using RateMyAir.Entities.DTO.Queries;
 using RateMyAir.Entities.Models;
 
-namespace RateMyAir.API.Mappings
+namespace RateMyAir.Entities.Settings
 {
     public class MappingProfile : Profile
     {
