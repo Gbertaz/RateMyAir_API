@@ -19,11 +19,9 @@ namespace RateMyAir.Services
 
         public void CacheAirQualityLevels(List<IndexLevel> levels)
         {
-            // Expires at midnight
-            TimeSpan cacheDuration = DateTime.Today.AddDays(1) - DateTime.Now;
+            TimeSpan cacheDuration = DateTime.Today.AddDays(5) - DateTime.Now;
             var cacheEntryOptions = new MemoryCacheEntryOptions()
                 .SetAbsoluteExpiration(cacheDuration);
-            // Cache the data
             _cache.Set(CacheKeys.AirQualityLevels, levels, cacheEntryOptions);
         }
 
@@ -41,11 +39,9 @@ namespace RateMyAir.Services
                     break;
             }
 
-            // Expires at midnight
-            TimeSpan cacheDuration = DateTime.Today.AddDays(1) - DateTime.Now;
+            TimeSpan cacheDuration = DateTime.Today.AddDays(5) - DateTime.Now;
             var cacheEntryOptions = new MemoryCacheEntryOptions()
                 .SetAbsoluteExpiration(cacheDuration);
-            // Cache the data
             _cache.Set(cacheKey, levels, cacheEntryOptions);
         }
 
