@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\RateMyAir_Common\RateMyAir.Repository\RateMyAir.Common.Repository.csproj" />
-    <ProjectReference Include="..\..\..\RateMyAir_Common\RateMyAir.Services\RateMyAir.Common.Services.csproj" />
+    <ProjectReference Include="..\..\..\RateMyAir_Common\RateMyAir.Common.Repositories\RateMyAir.Common.Repositories.csproj" />
+    <ProjectReference Include="..\..\..\RateMyAir_Common\RateMyAir.Common.Services\RateMyAir.Common.Services.csproj" />
   </ItemGroup>
 
 </Project>

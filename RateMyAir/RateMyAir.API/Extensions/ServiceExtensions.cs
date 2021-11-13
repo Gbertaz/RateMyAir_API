@@ -8,7 +8,7 @@ using Microsoft.OpenApi.Models;
 using RateMyAir.Common.Entities.Models;
 using RateMyAir.Common.Interfaces.Repositories;
 using RateMyAir.Common.Interfaces.Services;
-using RateMyAir.Common.Repository;
+using RateMyAir.Common.Repositories;
 using RateMyAir.Common.Services;
 using System;
 using System.Collections.Generic;
