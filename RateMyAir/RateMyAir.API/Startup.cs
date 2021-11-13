@@ -32,7 +32,7 @@ namespace RateMyAir.API
             services.ConfigureModelValidation();
             services.ConfigureSwagger();
             services.ConfigureRepositoryManager();
-            services.AddAutoMapper(typeof(Entities.Settings.MappingProfile));
+            services.AddAutoMapper(typeof(Common.Entities.Settings.MappingProfile));
 
             //Add support for response formatted in Xml
             services.AddControllers(config => {

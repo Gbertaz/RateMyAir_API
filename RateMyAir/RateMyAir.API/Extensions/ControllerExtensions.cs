@@ -2,7 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RateMyAir.Entities.DTO;
+using RateMyAir.Common.Entities.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

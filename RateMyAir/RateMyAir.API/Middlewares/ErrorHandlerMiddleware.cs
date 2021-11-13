@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using RateMyAir.Entities.DTO;
-using RateMyAir.Entities.Exceptions;
+using RateMyAir.Common.Entities.DTO;
+using RateMyAir.Common.Entities.Exceptions;
 using System;
 using System.Net;
 using System.Threading.Tasks;

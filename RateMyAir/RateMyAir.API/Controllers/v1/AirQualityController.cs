@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RateMyAir.API.Attributes;
-using RateMyAir.Entities.DTO;
-using RateMyAir.Entities.Exceptions;
-using RateMyAir.Entities.RequestFeatures;
-using RateMyAir.Interfaces.Services;
+using RateMyAir.Common.Entities.DTO;
+using RateMyAir.Common.Entities.Exceptions;
+using RateMyAir.Common.Entities.RequestFeatures;
+using RateMyAir.Common.Interfaces.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

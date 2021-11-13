@@ -19,12 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RateMyAir.Repository\RateMyAir.Repository.csproj" />
-    <ProjectReference Include="..\RateMyAir.Services\RateMyAir.Services.csproj" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\..\..\RateMyAir_Common\RateMyAir.Repository\RateMyAir.Common.Repository.csproj" />
+    <ProjectReference Include="..\..\..\RateMyAir_Common\RateMyAir.Services\RateMyAir.Common.Services.csproj" />
   </ItemGroup>
 
 </Project>
