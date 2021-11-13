@@ -8,7 +8,7 @@ api/airquality/index
 
 Returns the Air Quality Index of each day between the *DateFrom* and *DateTo* parameters based on the average pollution of the 24 hours. If no dates are provided, returns the last 24 hours Air Quality Index.  
 
-The implementation can be found in *RateMyAir.Services.PollutionService.cs* class.
+The implementation can be found in the **RateMyAir.Common** libraries, [AirQualityService](https://github.com/Gbertaz/RateMyAir_Common/blob/master/RateMyAir.Common.Services/AirQualityService.cs) class.
 
 The first part of the algorithm hits the database to fetch the necessary data by reading the Air Quality index levels stored in the *IndexLevels* table. To make things even faster and reduce unnecessary database access, this query is executed only once a day, the list of *IndexLevels* are cached in memory for a fast access.
 
