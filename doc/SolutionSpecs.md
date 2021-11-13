@@ -23,6 +23,8 @@
 * AutoMapper (10.1.1)
 * NLog.Extensions.Logging (1.7.4)
 
+You also need to clone the [RateMyAir.Common](https://github.com/Gbertaz/RateMyAir_Common) repository which contains some shared class libraries, add them to the RateMyAir_API solution and reference **RateMyAir.Common.Repositories** and **RateMyAir.Common.Services**.  
+
 ## Database Scaffolding
 
 The *Database First Approach* requires to create the tables in the database first, then creating the models in Visual Studio with the following procedure:
