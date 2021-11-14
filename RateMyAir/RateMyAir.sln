@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{79FCC865-6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateMyAir.Common.Entities", "..\..\RateMyAir_Common\RateMyAir.Common.Entities\RateMyAir.Common.Entities.csproj", "{9BC8E39C-580F-4EC1-AFC2-C531ABE8202B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateMyAir.Common.Clients", "..\..\RateMyAir_Common\RateMyAir.Common.Clients\RateMyAir.Common.Clients.csproj", "{2607E213-5FBD-46F5-B5E8-79665B225847}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateMyAir.Common.Interfaces", "..\..\RateMyAir_Common\RateMyAir.Common.Interfaces\RateMyAir.Common.Interfaces.csproj", "{77E929F6-B22A-4CDB-A2F0-9D6DB84C7875}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateMyAir.Common.Services", "..\..\RateMyAir_Common\RateMyAir.Common.Services\RateMyAir.Common.Services.csproj", "{FA817F83-1D16-425F-A7B6-FC30844C255D}"
@@ -56,18 +54,6 @@ Global
 		{9BC8E39C-580F-4EC1-AFC2-C531ABE8202B}.Release|iPhone.Build.0 = Release|Any CPU
 		{9BC8E39C-580F-4EC1-AFC2-C531ABE8202B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{9BC8E39C-580F-4EC1-AFC2-C531ABE8202B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{2607E213-5FBD-46F5-B5E8-79665B225847}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2607E213-5FBD-46F5-B5E8-79665B225847}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2607E213-5FBD-46F5-B5E8-79665B225847}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{2607E213-5FBD-46F5-B5E8-79665B225847}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{2607E213-5FBD-46F5-B5E8-79665B225847}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{2607E213-5FBD-46F5-B5E8-79665B225847}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{2607E213-5FBD-46F5-B5E8-79665B225847}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2607E213-5FBD-46F5-B5E8-79665B225847}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2607E213-5FBD-46F5-B5E8-79665B225847}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{2607E213-5FBD-46F5-B5E8-79665B225847}.Release|iPhone.Build.0 = Release|Any CPU
-		{2607E213-5FBD-46F5-B5E8-79665B225847}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{2607E213-5FBD-46F5-B5E8-79665B225847}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{77E929F6-B22A-4CDB-A2F0-9D6DB84C7875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{77E929F6-B22A-4CDB-A2F0-9D6DB84C7875}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77E929F6-B22A-4CDB-A2F0-9D6DB84C7875}.Debug|iPhone.ActiveCfg = Debug|Any CPU
